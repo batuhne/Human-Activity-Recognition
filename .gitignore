@@ -53,6 +53,12 @@ ipython_config.py
 UCI HAR Dataset/
 outputs/processed/
 
+# Model outputs (generated figures)
+models/*/outputs/
+outputs/
+# LaTeX build artifacts
+models/logistic_regression/paper/
+paper/
 
 *.pkl
 *.h5

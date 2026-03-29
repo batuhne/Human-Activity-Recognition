@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os, json
 
-# --- BASE DIRECTORY FIX ---
+# BASE DIRECTORY FIX 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, os.pardir))
 
@@ -19,7 +19,7 @@ DATA_DIR = os.path.join(ROOT_DIR, "UCI HAR Dataset")
 OUT_DIR = os.path.join(ROOT_DIR, "outputs", "processed")
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# --- Yardımcı fonksiyonlar ---
+# Yardımcı fonksiyonlar 
 def _read_lines(path: str):
     return pd.read_csv(path, header=None, delim_whitespace=True)
 
@@ -97,12 +97,12 @@ def main():
     with open(os.path.join(OUT_DIR, "feature_groups.json"), "w") as f:
         json.dump(groups, f, indent=2)
 
-    # --- varyant A: 70/10/20 ---
+    # varyant A: 70/10/20 
     (Xa_tr, ya_tr), (Xa_va, ya_va), (Xa_te, ya_te) = stratified_split(df, (70,10,20))
     _, Xa_trs, Xa_vas, Xa_tes = scale_standard(Xa_tr, Xa_va, Xa_te)
     save_npz("ucihar_70_10_20_std", Xa_trs, ya_tr, Xa_vas, ya_va, Xa_tes, ya_te, Xa_tr.columns)
 
-    # --- varyant B: 80/10/10 ---
+    # varyant B: 80/10/10 
     (Xb_tr, yb_tr), (Xb_va, yb_va), (Xb_te, yb_te) = stratified_split(df, (80,10,10))
     _, Xb_trs, Xb_vas, Xb_tes = scale_standard(Xb_tr, Xb_va, Xb_te)
     save_npz("ucihar_80_10_10_std", Xb_trs, yb_tr, Xb_vas, yb_va, Xb_tes, yb_te, Xb_tr.columns)
